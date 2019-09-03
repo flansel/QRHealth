@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+	<title>QR codes are fun</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="qrcode.js"></script>
+</head>
+<body>
+	<p>Separate each item with a Coma.</p>
+	<p id = infoipt>
+		<strong>Allergies:</strong>
+		<input id="Allergies" type="text" value="" style="width:40%;" /><br />
+		<strong>Other Medical:</strong>
+		<input id="Other" type="text" value="" style="width:40%;" /> <br />
+	</p>
+	<input id="getQRbtn" type="button" value="Get QR Code" onclick="main()">
+	<div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div><br />
+	<p id="outputmsg" style="display:none">
+		This is the final text encoded in the QR code.
+	</p>
+	<div id="output"></div>
+	<script>
+		var qrcode = new QRCode(document.getElementById("qrcode"), {
+			width : 128,
+			height : 128
+		});
+
+		function makeCod () {
+			document.getElementById('output').value = "ALLERGIES: " + document.getElementById("Allergies").value + " OTHER: " + document.getElementById("Other").value;
+			document.getElementById('output').innerHTML = "ALLERGIES: " + document.getElementById("Allergies").value + " OTHER: " + document.getElementById("Other").value;
+			var elText = document.getElementById("output");
+			qrcode.makeCode(elText.value);
+		}
+
+		function main(){
+			document.getElementById('outputmsg').style = "display:block;"
+			makeCod();
+		}
+	</script>
+</body>
