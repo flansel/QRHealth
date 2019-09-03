@@ -16,18 +16,19 @@
 		<input id="Other" type="text" value="" style="width:40%;" /> <br />
 	</p>
 	<input id="getQRbtn" type="button" value="Get QR Code" onclick="main()">
+	<input id="clearQRbtn" type="button" value="Clear QR Code" onclick="clearQR()">
 	<div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div><br />
 	<p id="outputmsg" style="display:none">
 		This is the final text encoded in the QR code.
 	</p>
 	<div id="output"></div>
 	<script>
-		var qrcode = new QRCode(document.getElementById("qrcode"), {
-			width : 128,
-			height : 128
-		});
 
 		function makeCod () {
+			var qrcode = new QRCode(document.getElementById("qrcode"), {
+				width : 128,
+				height : 128
+			});
 			document.getElementById('output').value = "ALLERGIES: " + document.getElementById("Allergies").value + " OTHER: " + document.getElementById("Other").value;
 			document.getElementById('output').innerHTML = "ALLERGIES: " + document.getElementById("Allergies").value + " OTHER: " + document.getElementById("Other").value;
 			var elText = document.getElementById("output");
@@ -37,6 +38,15 @@
 		function main(){
 			document.getElementById('outputmsg').style = "display:block;"
 			makeCod();
+		}
+
+		function clearQR(){
+			document.getElementById('Allergies').value = "";
+			document.getElementById('Other').value = "";
+			document.getElementById('output').innerHTML = "";
+			document.getElementById('output').value = "";
+			document.getElementById('outputmsg').style = "display:none";
+			document.getElementById('qrcode').innerHTML = "";
 		}
 	</script>
 </body>
